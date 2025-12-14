@@ -12,6 +12,8 @@ spec:
       labels:
         app: rabbit-consumer
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: consumer
           image: ghcr.io/gmbenz/consumer:latest

@@ -12,6 +12,8 @@ spec:
       labels:
         app: rabbit-producer
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: producer
           image: ghcr.io/gmbenz/producer:latest
