@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbit-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbit-producer
+  template:
+    metadata:
+      labels:
+        app: rabbit-producer
+    spec:
+      containers:
+        - name: producer
+          image: ghcr.io/gmbenz/producer:latest
+          env:
+            - name: RABBIT_HOST
+              value: "rabbitmq"   # or your MetalLB IP
+            - name: RABBIT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: username
+            - name: RABBIT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: password

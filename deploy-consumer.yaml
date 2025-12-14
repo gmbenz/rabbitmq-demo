@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbit-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbit-consumer
+  template:
+    metadata:
+      labels:
+        app: rabbit-consumer
+    spec:
+      containers:
+        - name: consumer
+          image: ghcr.io/gmbenz/consumer:latest
+          env:
+            - name: RABBIT_HOST
+              value: "rabbitmq"
+            - name: RABBIT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: username
+            - name: RABBIT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-default-user
+                  key: password
