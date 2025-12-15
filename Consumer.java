@@ -1,6 +1,4 @@
 import com.rabbitmq.client.*;
-import java.nio.channels.Channel;
-import java.sql.Connection;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
