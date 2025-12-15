@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-export GHCR_PAT=""
+export GHCR_PAT="$(cat)"
 
 echo "$GHCR_PAT" | docker login ghcr.io -u gmbenz --password-stdin
 
