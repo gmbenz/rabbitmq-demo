@@ -18,7 +18,7 @@ public class Producer {
 
             channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
             for (int i = 1; i <= 10; i++) {
                 String timestamp = LocalDateTime.now().format(formatter);
                 String message = "Hello message " + i + " at " + timestamp;
