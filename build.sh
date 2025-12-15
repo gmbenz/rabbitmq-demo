@@ -12,5 +12,6 @@ if [ $rc -ne 0 ]; then exit $rc; fi
 docker push ghcr.io/gmbenz/producer:latest
 
 docker build -f Dockerfile.consumer -t ghcr.io/gmbenz/consumer:latest .
+rc=$?
 if [ $rc -ne 0 ]; then exit $rc; fi
 docker push ghcr.io/gmbenz/consumer:latest
