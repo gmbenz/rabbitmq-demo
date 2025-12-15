@@ -1,5 +1,9 @@
 import com.rabbitmq.client.*;
 
+import java.nio.channels.Channel;
+import java.sql.Connection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Consumer {
     private final static String QUEUE_NAME = "testqueue";
 
@@ -15,8 +19,10 @@ public class Consumer {
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+            String timestamp = LocalDateTime.now().format(formatter);
             String message = new String(delivery.getBody(), "UTF-8");
-            System.out.println("Received: " + message);
+            System.out.println("Received: " + message + " at " + timestamp);
         };
 
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> {});
