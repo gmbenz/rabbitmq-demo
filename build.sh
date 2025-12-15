@@ -7,7 +7,10 @@ if [ -z "$GHCR_PAT" ]; then
 fi
 
 docker build -f Dockerfile.producer -t ghcr.io/gmbenz/producer:latest .
+rc=$?
+if [ $rc -ne 0 ]; then exit $rc; fi
 docker push ghcr.io/gmbenz/producer:latest
 
 docker build -f Dockerfile.consumer -t ghcr.io/gmbenz/consumer:latest .
+if [ $rc -ne 0 ]; then exit $rc; fi
 docker push ghcr.io/gmbenz/consumer:latest
