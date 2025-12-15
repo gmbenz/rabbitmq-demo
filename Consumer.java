@@ -1,9 +1,9 @@
 import com.rabbitmq.client.*;
-
 import java.nio.channels.Channel;
 import java.sql.Connection;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 public class Consumer {
     private final static String QUEUE_NAME = "testqueue";
 
