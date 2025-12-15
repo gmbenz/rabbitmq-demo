@@ -1,25 +1,17 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: rabbit-producer
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: rabbit-producer
   template:
-    metadata:
-      labels:
-        app: rabbit-producer
     spec:
-      imagePullSecrets:
-        - name: ghcr-secret
+      restartPolicy: Never
       containers:
         - name: producer
           image: ghcr.io/gmbenz/producer:latest
           env:
             - name: RABBIT_HOST
-              value: "rabbitmq"   # or your MetalLB IP
+              value: "rabbitmq"
             - name: RABBIT_USER
               valueFrom:
                 secretKeyRef:
