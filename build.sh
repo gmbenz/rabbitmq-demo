@@ -6,6 +6,8 @@ if [ -z "$GHCR_PAT" ]; then
    echo "$GHCR_PAT" | docker login ghcr.io -u gmbenz --password-stdin
 fi
 
+git pull
+
 docker build -f Dockerfile.producer -t ghcr.io/gmbenz/producer:latest .
 rc=$?
 if [ $rc -ne 0 ]; then exit $rc; fi
